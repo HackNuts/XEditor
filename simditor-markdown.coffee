@@ -6,7 +6,14 @@ class MarkdownButton extends Simditor.Button
 
   name: 'markdown'
   command: ->
-    console.log('markdown')
+    $('.editors').addClass('markdown');
+    markdownEditor = new Editor({
+      element: document.getElementById('markdown-editor')
+      status: false
+    });
+    markdownEditor.codemirror.setValue(toMarkdown(@editor.getValue()));
+    markdownEditor.render();
+    window.markdownEditor = markdownEditor;
 
   setIcon: (icon)->
     @el.find("span").removeClass().addClass("fa fa-#{icon}")

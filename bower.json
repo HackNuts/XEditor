@@ -8,6 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "simditor": "~2.1.8",
-    "font-awesome": "~4.3.0"
+    "font-awesome": "~4.3.0",
+    "to-markdown": "~0.0.3"
   }
 }

@@ -1,0 +1,12 @@
+.editors > .markdown-editor-wap {
+  display: none;
+}
+.editors > .simditor {
+  display: block;
+}
+.editors.markdown > .markdown-editor-wap {
+  display: block;
+}
+.editors.markdown > .simditor {
+  display: none;
+}

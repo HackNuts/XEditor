@@ -21,7 +21,15 @@
     MarkdownButton.prototype.name = 'markdown';
 
     MarkdownButton.prototype.command = function() {
-      return console.log('markdown');
+      var markdownEditor;
+      $('.editors').addClass('markdown');
+      markdownEditor = new Editor({
+        element: document.getElementById('markdown-editor'),
+        status: false
+      });
+      markdownEditor.codemirror.setValue(toMarkdown(this.editor.getValue()));
+      markdownEditor.render();
+      return window.markdownEditor = markdownEditor;
     };
 
     MarkdownButton.prototype.setIcon = function(icon) {
