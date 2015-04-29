@@ -4,7 +4,7 @@ $(function () {
         toolbar: ['bold', 'italic', 'underline', 'ul', 'ol', 'blockquote', 'code', 'link', 'image', 'markdown'],
         defaultImage: 'default.png',
         upload: {
-            url: '/upload.json',
+            url: '/XEditor/upload.json',
             params: null,
             fileKey: 'file',
             connectionCount: 1,
