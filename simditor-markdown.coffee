@@ -7,8 +7,7 @@ class MarkdownButton extends Simditor.Button
   name: 'markdown'
   needFocus: false
   command: ->
-    console.log('dasda')
-    $('.editors').addClass('markdown');
+    @el.parents('.xeditor').addClass('markdown');
     markdownEditor.codemirror.setValue(toMarkdown(@editor.getValue()));
     markdownEditor.render();
 

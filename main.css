@@ -1,12 +1,12 @@
-.editors > .markdown-editor-wap {
+.xeditor > .markdown-editor-wap {
   display: none;
 }
-.editors > .simditor {
+.xeditor > .simditor {
   display: block;
 }
-.editors.markdown > .markdown-editor-wap {
+.xeditor.markdown > .markdown-editor-wap {
   display: block;
 }
-.editors.markdown > .simditor {
+.xeditor.markdown > .simditor {
   display: none;
 }

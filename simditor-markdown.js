@@ -23,8 +23,7 @@
     MarkdownButton.prototype.needFocus = false;
 
     MarkdownButton.prototype.command = function() {
-      console.log('dasda');
-      $('.editors').addClass('markdown');
+      this.el.parents('.xeditor').addClass('markdown');
       markdownEditor.codemirror.setValue(toMarkdown(this.editor.getValue()));
       return markdownEditor.render();
     };

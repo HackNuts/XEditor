@@ -246,7 +246,7 @@ function rich(editor){
   var html = marked(content);
 
   richEditor.setValue(html);
-  $('.editors').removeClass('markdown');
+  $(editor.element).parents('.xeditor').removeClass('markdown');
 }
 
 function _replaceSelection(cm, active, start, end) {
