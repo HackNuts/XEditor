@@ -1,21 +1,17 @@
 var toolbar = [
   {name: 'bold', action: toggleBold},
   {name: 'italic', action: toggleItalic},
-  {name: 'code', action: toggleCodeBlock},
-  '|',
-
-  {name: 'quote', action: toggleBlockquote},
   {name: 'unordered-list', action: toggleUnOrderedList},
   {name: 'ordered-list', action: toggleOrderedList},
-  '|',
-
+  {name: 'quote', action: toggleBlockquote},
+  {name: 'code', action: toggleCodeBlock},
   {name: 'link', action: drawLink},
   {name: 'image', action: drawImage},
   '|',
-
-  {name: 'info', action: 'http://lab.lepture.com/editor/markdown'},
+  {name: 'info', action: 'http://www.appinn.com/markdown'},
   {name: 'preview', action: togglePreview},
-  {name: 'fullscreen', action: toggleFullScreen}
+  {name: 'fullscreen', action: toggleFullScreen},
+  {name: 'undo', action: rich}
 ];
 
 /**
@@ -274,4 +270,7 @@ Editor.prototype.togglePreview = function() {
 };
 Editor.prototype.toggleFullScreen = function() {
   toggleFullScreen(this);
+};
+Editor.prototype.rich = function(){
+  rich(this);
 };

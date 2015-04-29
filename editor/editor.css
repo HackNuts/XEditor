@@ -87,6 +87,10 @@
   position: absolute;
   right: 0;
 }
+.editor-toolbar a.icon-undo {
+  position: absolute;
+  right: 30px;
+}
 .editor-statusbar {
   border-top: 1px solid #ece9e9;
   padding: 8px 10px;

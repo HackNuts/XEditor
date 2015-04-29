@@ -20,16 +20,13 @@
 
     MarkdownButton.prototype.name = 'markdown';
 
+    MarkdownButton.prototype.needFocus = false;
+
     MarkdownButton.prototype.command = function() {
-      var markdownEditor;
+      console.log('dasda');
       $('.editors').addClass('markdown');
-      markdownEditor = new Editor({
-        element: document.getElementById('markdown-editor'),
-        status: false
-      });
       markdownEditor.codemirror.setValue(toMarkdown(this.editor.getValue()));
-      markdownEditor.render();
-      return window.markdownEditor = markdownEditor;
+      return markdownEditor.render();
     };
 
     MarkdownButton.prototype.setIcon = function(icon) {

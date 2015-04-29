@@ -241,6 +241,14 @@ function togglePreview(editor) {
   preview.innerHTML = parse(text);
 }
 
+function rich(editor){
+  var content = editor.codemirror.getValue();
+  var html = marked(content);
+
+  richEditor.setValue(html);
+  $('.editors').removeClass('markdown');
+}
+
 function _replaceSelection(cm, active, start, end) {
   var text;
   var startPoint = cm.getCursor('start');
