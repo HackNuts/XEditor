@@ -1,0 +1,22 @@
+{
+  "name": "XEditor",
+  "version": "1.0.0",
+  "description": "http://hustlzp.github.io/XEditor",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hustlzp/XEditor.git"
+  },
+  "author": "hustlzp",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hustlzp/XEditor/issues"
+  },
+  "homepage": "https://github.com/hustlzp/XEditor",
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
+}
