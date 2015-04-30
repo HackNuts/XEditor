@@ -1,0 +1,3 @@
+[submodule "simditor"]
+	path = simditor
+	url = https://github.com/hustlzp/simditor.git
