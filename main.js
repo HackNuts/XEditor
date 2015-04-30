@@ -3,6 +3,7 @@ $(function () {
         textarea: $('#rich-editor'),
         toolbar: ['bold', 'italic', 'underline', 'ul', 'ol', 'blockquote', 'code', 'link', 'image', 'markdown'],
         defaultImage: 'default.png',
+        toolbarFloat: false,
         upload: {
             url: '/XEditor/upload.json',
             params: null,
