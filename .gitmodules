@@ -1,3 +1,7 @@
 [submodule "simditor"]
 	path = simditor
 	url = https://github.com/hustlzp/simditor.git
+[submodule "editor"]
+	path = editor
+	url = https://github.com/hustlzp/editor.git
+	branch = xeditor
