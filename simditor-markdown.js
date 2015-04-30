@@ -24,7 +24,9 @@
 
     MarkdownButton.prototype.command = function() {
       this.el.parents('.xeditor').addClass('markdown');
-      markdownEditor.codemirror.setValue(toMarkdown(this.editor.getValue()));
+      markdownEditor.codemirror.setValue(toMarkdown(this.editor.getValue(), {
+        gfm: true
+      }));
       return markdownEditor.render();
     };
 
