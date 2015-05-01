@@ -5,6 +5,8 @@ $(function () {
 function XEditor(id) {
   var $textarea = $('#' + id);
 
+  $textarea.hide();
+
   // Rich editor
   this.richEditor = new Simditor({
     textarea: $textarea,
