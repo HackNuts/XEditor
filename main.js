@@ -22,7 +22,6 @@ function XEditor(id) {
 
   this.richEditor.parent = this;
   this.richEditor.el.wrap("<div class='xeditor'></div>");
-  $('.toolbar-item-markdown').parent().css('float', 'right');
 
   // Markdown editor
   this.markdownEditor = new Editor({
