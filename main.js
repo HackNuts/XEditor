@@ -1,6 +1,13 @@
 $(function () {
-  window.richEditor = new Simditor({
-    textarea: $('#rich-editor'),
+  var xeditor = new XEditor('editor');
+});
+
+function XEditor(id) {
+  var $textarea = $('#' + id);
+
+  // Rich editor
+  this.richEditor = new Simditor({
+    textarea: $textarea,
     toolbar: ['bold', 'italic', 'underline', 'ul', 'ol', 'blockquote', 'code', 'link', 'image', 'markdown'],
     defaultImage: 'default.png',
     toolbarFloat: false,
@@ -13,10 +20,19 @@ $(function () {
     }
   });
 
-  window.markdownEditor = new Editor({
-    element: document.getElementById('markdown-editor'),
+  this.richEditor.parent = this;
+  this.richEditor.el.wrap("<div class='xeditor'></div>");
+  $('.toolbar-item-markdown').parent().css('float', 'right');
+
+  // Markdown editor
+  this.markdownEditor = new Editor({
+    element: document.getElementById(id),
     status: false
   });
 
-  $('.toolbar-item-markdown').parent().css('float', 'right');
-});
+  this.markdownEditor.parent = this;
+  this.richEditor.el.parent().append(this.markdownEditor.el);
+
+  this.textarea = $textarea;
+  this.element = this.richEditor.el.parent();
+}

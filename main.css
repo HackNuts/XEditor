@@ -15,13 +15,13 @@ body {
   width: 800px;
   margin: 0 auto 100px auto;
 }
-.xeditor > .markdown-editor-wap {
+.xeditor > .meditor {
   display: none;
 }
 .xeditor > .simditor {
   display: block;
 }
-.xeditor.markdown > .markdown-editor-wap {
+.xeditor.markdown > .meditor {
   display: block;
 }
 .xeditor.markdown > .simditor {

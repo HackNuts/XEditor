@@ -8,8 +8,8 @@ class MarkdownButton extends Simditor.Button
   needFocus: false
   command: ->
     @el.parents('.xeditor').addClass('markdown');
-    markdownEditor.codemirror.setValue(toMarkdown(@editor.getValue(), {gfm: true}));
-    markdownEditor.render();
+    @editor.parent.markdownEditor.codemirror.setValue(toMarkdown(@editor.getValue(), {gfm: true}));
+    @editor.parent.markdownEditor.render();
 
   setIcon: (icon)->
     @el.find("span").removeClass().addClass("fa fa-#{icon}")

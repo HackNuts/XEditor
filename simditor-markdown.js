@@ -24,10 +24,10 @@
 
     MarkdownButton.prototype.command = function() {
       this.el.parents('.xeditor').addClass('markdown');
-      markdownEditor.codemirror.setValue(toMarkdown(this.editor.getValue(), {
+      this.editor.parent.markdownEditor.codemirror.setValue(toMarkdown(this.editor.getValue(), {
         gfm: true
       }));
-      return markdownEditor.render();
+      return this.editor.parent.markdownEditor.render();
     };
 
     MarkdownButton.prototype.setIcon = function(icon) {
