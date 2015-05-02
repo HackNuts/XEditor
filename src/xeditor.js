@@ -44,6 +44,7 @@ XEditor.prototype.switchToMarkdown = function () {
   this.element.addClass('markdown');
   this.markdownEditor.codemirror.setValue(markdown);
   this.rich = false;
+  this.sync();
 };
 
 XEditor.prototype.switchToRich = function () {
@@ -60,4 +61,17 @@ XEditor.prototype.switchToRich = function () {
   this.richEditor.setValue(html);
   this.element.removeClass('markdown');
   this.rich = true;
+  this.sync();
+};
+
+XEditor.prototype.getValue = function () {
+  if (this.rich) {
+    return this.richEditor.getValue();
+  } else {
+    return this.markdownEditor.codemirror.getValue();
+  }
+};
+
+XEditor.prototype.sync = function () {
+  this.textarea.text(this.getValue());
 };
