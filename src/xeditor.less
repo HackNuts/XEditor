@@ -1,0 +1,19 @@
+.xeditor {
+  display: block;
+
+  & > .meditor {
+    display: none;
+  }
+  & > .simditor {
+    display: block;
+  }
+
+  &.markdown {
+    & > .meditor {
+      display: block;
+    }
+    & > .simditor {
+      display: none;
+    }
+  }
+}

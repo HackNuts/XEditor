@@ -1,0 +1,15 @@
+.xeditor {
+  display: block;
+}
+.xeditor > .meditor {
+  display: none;
+}
+.xeditor > .simditor {
+  display: block;
+}
+.xeditor.markdown > .meditor {
+  display: block;
+}
+.xeditor.markdown > .simditor {
+  display: none;
+}

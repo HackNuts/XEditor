@@ -11,27 +11,13 @@ body {
   margin: 0 0 40px 0;
   font-size: 18px;
 }
-textarea {
+.content {
   width: 800px;
   margin: 0 auto 100px auto;
+}
+.content textarea {
   height: 400px;
   display: block;
-}
-.xeditor {
-  width: 800px;
-  margin: 0 auto 100px auto;
-}
-.xeditor > .meditor {
-  display: none;
-}
-.xeditor > .simditor {
-  display: block;
-}
-.xeditor.markdown > .meditor {
-  display: block;
-}
-.xeditor.markdown > .simditor {
-  display: none;
 }
 .footer {
   font-size: 12px;
