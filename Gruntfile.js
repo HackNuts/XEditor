@@ -31,17 +31,35 @@ module.exports = function (grunt) {
     watch: {
       scripts: {
         files: script_files,
-        tasks: ['concat:scripts']
+        tasks: ['concat:scripts', 'uglify']
       },
       styles: {
         files: style_files,
-        tasks: ['concat:styles']
+        tasks: ['concat:styles', "cssmin"]
       }
     },
+
+    uglify: {
+      scripts: {
+        files: {
+          'dist/xeditor.min.js': script_files
+        }
+      }
+    },
+
+    cssmin: {
+      styles: {
+        files: {
+          'dist/xeditor.min.css': style_files
+        }
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-  grunt.registerTask('default', ['concat', 'watch']);
+  grunt.registerTask('default', ['concat', 'uglify', 'cssmin', 'watch']);
 };
