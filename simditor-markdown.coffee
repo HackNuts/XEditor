@@ -7,8 +7,6 @@ class MarkdownButton extends Simditor.Button
   needFocus: false
   icon: 'maxcdn'
   command: ->
-    @el.parents('.xeditor').addClass('markdown');
-    @editor.parent.markdownEditor.codemirror.setValue(toMarkdown(@editor.getValue(), {gfm: true}));
-    @editor.parent.markdownEditor.render();
+    @editor.parent.switchToMarkdown()
 
 Simditor.Toolbar.addButton MarkdownButton

@@ -24,11 +24,7 @@
     MarkdownButton.prototype.icon = 'maxcdn';
 
     MarkdownButton.prototype.command = function() {
-      this.el.parents('.xeditor').addClass('markdown');
-      this.editor.parent.markdownEditor.codemirror.setValue(toMarkdown(this.editor.getValue(), {
-        gfm: true
-      }));
-      return this.editor.parent.markdownEditor.render();
+      return this.editor.parent.switchToMarkdown();
     };
 
     return MarkdownButton;

@@ -26,10 +26,20 @@ function XEditor(id) {
     element: document.getElementById(id),
     status: false
   });
+  this.markdownEditor.render();
 
   this.markdownEditor.parent = this;
   this.richEditor.el.parent().append(this.markdownEditor.el);
 
+  // Attach some attr
   this.textarea = $textarea;
   this.element = this.richEditor.el.parent();
 }
+
+XEditor.prototype.switchToMarkdown = function () {
+  var html = this.richEditor.getValue();
+  var markdown = toMarkdown(html, {gfm: true});
+
+  this.element.addClass('markdown');
+  this.markdownEditor.codemirror.setValue(markdown);
+};
