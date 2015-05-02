@@ -1,6 +1,6 @@
 {
   "name": "simple-hotkeys",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/ichord/simple-hotkeys",
   "authors": [
     "ichord <chord.luo@gmail.com>"
@@ -28,4 +28,3 @@
     "simple-module": "2.x"
   }
 }
-

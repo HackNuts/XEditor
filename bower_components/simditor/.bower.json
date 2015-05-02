@@ -1,6 +1,6 @@
 {
   "name": "simditor",
-  "version": "2.1.8",
+  "version": "2.1.9",
   "homepage": "http://simditor.tower.im/",
   "authors": [
     "farthinker <farthinker@gmail.com>"
@@ -38,14 +38,13 @@
     "simple-uploader": "2.x",
     "simple-hotkeys": "1.x"
   },
-  "_release": "2.1.8",
+  "_release": "2.1.9",
   "_resolution": {
     "type": "version",
-    "tag": "v2.1.8",
-    "commit": "084bf73a1c4cea9cd03a07a7ffd80c2907f11e85"
+    "tag": "v2.1.9",
+    "commit": "25b323f5414b3c46fc3c68c0c8782a369d77a5fe"
   },
   "_source": "git://github.com/mycolorway/simditor.git",
   "_target": "~2.1.8",
-  "_originalSource": "simditor",
-  "_direct": true
+  "_originalSource": "simditor"
 }
