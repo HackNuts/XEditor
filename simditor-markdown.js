@@ -14,13 +14,14 @@
 
     MarkdownButton.prototype._init = function() {
       this.title = '切换到 Markdown 模式';
-      MarkdownButton.__super__._init.apply(this, arguments);
-      return this.setIcon("maxcdn");
+      return MarkdownButton.__super__._init.apply(this, arguments);
     };
 
     MarkdownButton.prototype.name = 'markdown';
 
     MarkdownButton.prototype.needFocus = false;
+
+    MarkdownButton.prototype.icon = 'maxcdn';
 
     MarkdownButton.prototype.command = function() {
       this.el.parents('.xeditor').addClass('markdown');
@@ -28,10 +29,6 @@
         gfm: true
       }));
       return this.editor.parent.markdownEditor.render();
-    };
-
-    MarkdownButton.prototype.setIcon = function(icon) {
-      return this.el.find("span").removeClass().addClass("fa fa-" + icon);
     };
 
     return MarkdownButton;
