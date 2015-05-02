@@ -34,6 +34,7 @@ function XEditor(id) {
   // Attach some attr
   this.textarea = $textarea;
   this.element = this.richEditor.el.parent();
+  this.rich = true;
 }
 
 XEditor.prototype.switchToMarkdown = function () {
@@ -42,4 +43,21 @@ XEditor.prototype.switchToMarkdown = function () {
 
   this.element.addClass('markdown');
   this.markdownEditor.codemirror.setValue(markdown);
+  this.rich = false;
+};
+
+XEditor.prototype.switchToRich = function () {
+  var markdown = this.markdownEditor.codemirror.getValue();
+  var renderer = new marked.Renderer();
+  var html;
+
+  renderer.em = function (text) {
+    return "<i>" + text + "</i>";
+  };
+
+  html = marked(markdown, {renderer: renderer});
+
+  this.richEditor.setValue(html);
+  this.element.removeClass('markdown');
+  this.rich = true;
 };
