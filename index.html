@@ -26,7 +26,7 @@
 <div class="subtitle">Mix of WYSIWYG editor and markdown editor.</div>
 
 <div class="content">
-    <textarea name="" id="editor" cols="30" rows="10" autofocus>
+<textarea name="" id="editor" cols="30" rows="10" autofocus>
     <p><strong>粗体</strong></p>
 
     <p><i>斜体</i></p>
@@ -48,13 +48,38 @@
     <blockquote><p>引用</p></blockquote>
 
     <pre class="selected"><code class="lang-python"># 代码
-        def hello():
-        &nbsp;&nbsp;print('人生苦短，我用Python。')</code></pre>
+def hello():
+&nbsp;&nbsp;print('人生苦短，我用Python。')</code></pre>
 
     <a href="https://github.com" target="_blank">链接</a>
 
     <p><img alt="nature" src="upload.png" alt=""/></p>
 </textarea>
+
+    <div class="doc">
+        <h3>下载并引用</h3>
+
+        <p>在<a href="https://github.com/hustlzp/XEditor/archive/gh-pages.zip" target="_blank">这里</a>下载解压最新版的 XEditor 文件，在页面中引入这些文件：
+        </p>
+
+        <pre>
+            <code>
+&lt;link rel="stylesheet" href="font-awesome.min.css"/&gt;
+&lt;link rel="stylesheet" href="dist/xeditor.min.css"/&gt;
+&lt;script src="jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="dist/xeditor.min.js"&gt;&lt;/script&gt;</code>
+        </pre>
+
+        <p>其中，XEditor 依赖于 jQuery 和 Font-Awesome，因此需要引入相关文件。</p>
+
+        <h3>初始化配置</h3>
+
+        <p>TODO</p>
+
+        <h3>方法</h3>
+
+        <p>TODO</p>
+    </div>
 </div>
 
 <div class="footer">2015 © hustlzp</div>
