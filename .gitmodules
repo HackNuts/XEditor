@@ -5,3 +5,6 @@
 	path = editor
 	url = https://github.com/hustlzp/editor.git
 	branch = xeditor
+[submodule "to-markdown"]
+	path = to-markdown
+	url = https://github.com/hustlzp/to-markdown.git
