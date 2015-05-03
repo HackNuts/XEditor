@@ -1122,6 +1122,9 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 .editor-toolbar > ul > li > .toolbar-menu ul > li .menu-item:hover {
   background: #f6f6f6;
 }
+.editor-toolbar > ul > li > .toolbar-menu input {
+  display: none;
+}
 .editor-toolbar > ul > li i.separator {
   display: inline-block;
   width: 0;

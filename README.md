@@ -8,7 +8,7 @@ Thanks to Tower's [Simditor](https://github.com/mycolorway/simditor) and lepture
 
 ##下载并引用
 
-在<a href="https://github.com/hustlzp/XEditor/archive/gh-pages.zip" target="_blank">这里</a>下载解压最新版的 XEditor 文件，在页面中引入这些文件：
+在页面中引入如下文件：
 
 ```html
 <link rel="stylesheet" href="font-awesome.min.css">

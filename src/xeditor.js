@@ -1,32 +1,28 @@
 function XEditor(id, options) {
   var $textarea = $('#' + id);
 
-  $textarea.hide();
-
-  var options = $.extend({
+  this.options = $.extend({
     rich: true,
-    url: '',
     defaultImage: 'default.png',
-    upload: {
-      url: '',
-      fileKey: 'file',
-      params: {}
-    }
   }, options);
+
+  this.options.upload = $.extend({
+    url: '',
+    fileKey: 'file',
+    params: {},
+    connectionCount: 1,
+    leaveConfirm: '正在上传文件，如果离开上传会自动取消'
+  }, this.options.upload);
+
+  $textarea.hide();
 
   // Rich editor
   this.richEditor = new Simditor({
     textarea: $textarea,
     toolbar: ['bold', 'italic', 'underline', 'ul', 'ol', 'blockquote', 'code', 'link', 'image', 'markdown'],
-    defaultImage: options.defaultImage,
+    defaultImage: this.options.defaultImage,
     toolbarFloat: false,
-    upload: {
-      url: options.upload.url,
-      params: options.upload.params,
-      fileKey: options.upload.fileKey,
-      connectionCount: 1,
-      leaveConfirm: '正在上传文件，如果离开上传会自动取消'
-    }
+    upload: this.options.upload
   });
 
   this.richEditor.parent = this;
@@ -35,7 +31,8 @@ function XEditor(id, options) {
   // Markdown editor
   this.markdownEditor = new Editor({
     element: document.getElementById(id),
-    status: false
+    status: false,
+    upload: this.options.upload
   });
   this.markdownEditor.render();
 
@@ -46,7 +43,7 @@ function XEditor(id, options) {
   this.textarea = $textarea;
   this.element = this.richEditor.el.parent();
 
-  this.rich = options.rich;
+  this.rich = this.options.rich;
   if (!this.rich) {
     this.element.addClass('markdown');
   }
