@@ -1,6 +1,6 @@
 # XEditor
 
-DEMO: http://hustlzp.github.io/XEditor
+[DEMO](http://hustlzp.github.io/XEditor)
 
 Mix of WYSIWYG editor and markdown editor.
 
