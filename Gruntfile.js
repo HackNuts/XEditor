@@ -2,7 +2,7 @@ module.exports = function (grunt) {
   var script_files = [
     "simditor/lib/simditor.js",
     "editor/build/editor.js",
-    "bower_components/to-markdown/dist/to-markdown.js",
+    "to-markdown/dist/to-markdown.js",
     "bower_components/marked/marked.min.js",
     "src/xeditor.js"
   ];
@@ -11,8 +11,7 @@ module.exports = function (grunt) {
     "simditor/styles/simditor.css",
     "editor/build/editor.css",
     "src/xeditor.css"
-  ];
-
+  ]
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
