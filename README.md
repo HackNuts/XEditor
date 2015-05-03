@@ -6,7 +6,7 @@ Mix of WYSIWYG editor and markdown editor.
 
 Thanks to Tower's [Simditor](https://github.com/mycolorway/simditor) and lepture's [Editor](https://github.com/lepture/editor).
 
-##下载并引用
+##使用
 
 在页面中引入如下文件：
 
@@ -18,8 +18,6 @@ Thanks to Tower's [Simditor](https://github.com/mycolorway/simditor) and lepture
 ```
 
 其中，XEditor 依赖于 jQuery 和 Font-Awesome，因此需要引入相关文件。
-
-##初始化配置
 
 在使用 XEditor 的 HTML 页面里应该有一个对应的 textarea 文本框，例如：
 
