@@ -1,9 +1,15 @@
-function XEditor(id, options) {
-  var $textarea = $('#' + id);
+function XEditor(options) {
+  var $textarea = $(options.textarea);
+
+  if ($textarea.length === 0) {
+    throw new Error('textarea is required.');
+  } else if ($textarea.length > 1) {
+    throw new Error('should be only one textarea.');
+  }
 
   this.options = $.extend({
     rich: true,
-    defaultImage: 'default.png',
+    defaultImage: 'default.png'
   }, options);
 
   this.options.upload = $.extend({
@@ -30,7 +36,7 @@ function XEditor(id, options) {
 
   // Markdown editor
   this.markdownEditor = new Editor({
-    element: document.getElementById(id),
+    element: $textarea[0],
     status: false,
     upload: this.options.upload
   });

@@ -1,5 +1,6 @@
 $(function () {
-  var xeditor = new XEditor('editor', {
+  var xeditor = new XEditor({
+    textarea: $('#editor'),
     upload: {
       url: '/XEditor/upload.json'
     }
