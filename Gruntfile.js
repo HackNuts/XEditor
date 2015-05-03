@@ -11,7 +11,8 @@ module.exports = function (grunt) {
     "simditor/styles/simditor.css",
     "editor/build/editor.css",
     "src/xeditor.css"
-  ]
+  ];
+
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
