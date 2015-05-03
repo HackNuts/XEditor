@@ -49,7 +49,7 @@ textarea 是初始化 XEditor 的必需选项，可以接受 jQuery Object、HTM
 
 XEditor 初始化之后，编辑器实例会暴露一些公共方法供调用：
 
-###setValue(val `String`)
+###setValue(value)
 
 设置编辑器的正文内容。
 
