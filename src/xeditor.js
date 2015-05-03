@@ -70,6 +70,11 @@ XEditor.prototype.switchToRich = function () {
     return "<i>" + text + "</i>";
   };
 
+  renderer.code = function (code, language) {
+    console.log(language);
+    return "<pre><code class='lang-" + language + "'>" + code + "</code></pre>";
+  };
+
   html = marked(markdown, {renderer: renderer});
 
   this.richEditor.setValue(html);

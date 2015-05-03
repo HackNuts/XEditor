@@ -4278,7 +4278,7 @@ CodeButton = (function(superClass) {
       } else {
         codeStr = this.editor.formatter.clearHtml($el);
       }
-      block = $('<pre><code>' + codeStr + '</code></pre>');
+      block = $("<pre><code>" + codeStr + "</code></pre>");
       results.push(block);
     }
     return results;
@@ -4325,10 +4325,9 @@ CodePopover = (function(superClass) {
     if (codeClassName) {
       codeClassName = codeClassName.toLowerCase();
       this.lang = codeClassName.split('-')[1];
+    } else {
+      this.lang = null;
     }
-    ({
-      "else": this.lang = null
-    });
     if (this.lang) {
       this.target.find('code').attr('class', codeClassName);
       return this.selectEl.val(this.lang);
@@ -14409,6 +14408,11 @@ XEditor.prototype.switchToRich = function () {
 
   renderer.em = function (text) {
     return "<i>" + text + "</i>";
+  };
+
+  renderer.code = function (code, language) {
+    console.log(language);
+    return "<pre><code class='lang-" + language + "'>" + code + "</code></pre>";
   };
 
   html = marked(markdown, {renderer: renderer});

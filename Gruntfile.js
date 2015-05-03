@@ -31,11 +31,11 @@ module.exports = function (grunt) {
     watch: {
       scripts: {
         files: script_files,
-        tasks: ['concat:scripts', 'uglify']
+        tasks: ['concat:scripts']
       },
       styles: {
         files: style_files,
-        tasks: ['concat:styles', "cssmin"]
+        tasks: ['concat:styles']
       }
     },
 
@@ -62,4 +62,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   grunt.registerTask('default', ['concat', 'uglify', 'cssmin', 'watch']);
+  grunt.registerTask('build', ['concat', 'uglify', 'cssmin']);
 };
