@@ -61,6 +61,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-  grunt.registerTask('default', ['concat', 'uglify', 'cssmin', 'watch']);
-  grunt.registerTask('build', ['concat', 'uglify', 'cssmin']);
+  grunt.registerTask('package', ['concat', 'uglify', 'cssmin']);
+  grunt.registerTask('default', ['package', 'watch']);
 };
