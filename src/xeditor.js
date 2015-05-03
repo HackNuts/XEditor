@@ -71,8 +71,11 @@ XEditor.prototype.switchToRich = function () {
   };
 
   renderer.code = function (code, language) {
-    console.log(language);
-    return "<pre><code class='lang-" + language + "'>" + code + "</code></pre>";
+    if (typeof language !== undefined && language !== "") {
+      return "<pre><code class='lang-" + language + "'>" + code + "</code></pre>";
+    } else {
+      return "<pre><code>" + code + "</code></pre>";
+    }
   };
 
   html = marked(markdown, {renderer: renderer});
