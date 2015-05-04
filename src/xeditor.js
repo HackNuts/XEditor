@@ -61,7 +61,7 @@ function XEditor(options) {
 
 XEditor.prototype.switchToMarkdown = function () {
   var html = this.richEditor.getValue();
-  var markdown = toMarkdown(html, {gfm: true});
+  var markdown = htmlToMarkdown(html);
 
   this.element.addClass('markdown');
   this.markdownEditor.codemirror.setValue(markdown);
@@ -70,22 +70,7 @@ XEditor.prototype.switchToMarkdown = function () {
 
 XEditor.prototype.switchToRich = function () {
   var markdown = this.markdownEditor.codemirror.getValue();
-  var renderer = new marked.Renderer();
-  var html;
-
-  renderer.em = function (text) {
-    return "<i>" + text + "</i>";
-  };
-
-  renderer.code = function (code, language) {
-    if (typeof language !== undefined && language !== "") {
-      return "<pre><code class='lang-" + language + "'>" + code + "</code></pre>";
-    } else {
-      return "<pre><code>" + code + "</code></pre>";
-    }
-  };
-
-  html = marked(markdown, {renderer: renderer});
+  var html = markdownToHTML(markdown);
 
   this.richEditor.setValue(html);
   this.element.removeClass('markdown');
@@ -111,3 +96,25 @@ XEditor.prototype.setValue = function (content) {
 XEditor.prototype.sync = function () {
   this.textarea.text(this.getValue());
 };
+
+function htmlToMarkdown(html) {
+  return toMarkdown(html, {gfm: true});
+}
+
+function markdownToHTML(markdown) {
+  var renderer = new marked.Renderer();
+
+  renderer.em = function (text) {
+    return "<i>" + text + "</i>";
+  };
+
+  renderer.code = function (code, language) {
+    if (typeof language !== undefined && language !== "") {
+      return "<pre><code class='lang-" + language + "'>" + code + "</code></pre>";
+    } else {
+      return "<pre><code>" + code + "</code></pre>";
+    }
+  };
+
+  return marked(markdown, {renderer: renderer});
+}
