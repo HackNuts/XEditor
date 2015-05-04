@@ -4270,7 +4270,7 @@ CodeButton = (function(superClass) {
     $el = $(el);
     results = [];
     if ($el.is(this.htmlTag)) {
-      block = $('<p/>').append($el.html().replace('\n', '<br/>'));
+      block = $('<p/>').append($el.find('code').html().replace('\n', '<br/>'));
       results.push(block);
     } else {
       if (!$el.text() && $el.children().length === 1 && $el.children().is('br')) {
