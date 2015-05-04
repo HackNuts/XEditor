@@ -59,7 +59,7 @@ textarea 是初始化 XEditor 的必需选项，可以接受 jQuery Object、HTM
 
 注：图片上传成功后，服务端需要返回 json 格式的图片地址：
   
-```json
+```
 {
   "success": true/false,
   "msg": "上传失败信息", # 可选
