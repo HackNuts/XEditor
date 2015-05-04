@@ -12059,6 +12059,66 @@ return uploader;
 
 }));
 
+// Utility function that allows modes to be combined. The mode given
+// as the base argument takes care of most of the normal mode
+// functionality, but a second (typically simple) mode is used, which
+// can override the style of text. Both modes get to parse all of the
+// text, but when both assign a non-null style to a piece of code, the
+// overlay wins, unless the combine argument was true, in which case
+// the styles are combined.
+
+// overlayParser is the old, deprecated name
+CodeMirror.overlayMode = CodeMirror.overlayParser = function(base, overlay, combine) {
+  return {
+    startState: function() {
+      return {
+        base: CodeMirror.startState(base),
+        overlay: CodeMirror.startState(overlay),
+        basePos: 0, baseCur: null,
+        overlayPos: 0, overlayCur: null
+      };
+    },
+    copyState: function(state) {
+      return {
+        base: CodeMirror.copyState(base, state.base),
+        overlay: CodeMirror.copyState(overlay, state.overlay),
+        basePos: state.basePos, baseCur: null,
+        overlayPos: state.overlayPos, overlayCur: null
+      };
+    },
+
+    token: function(stream, state) {
+      if (stream.start == state.basePos) {
+        state.baseCur = base.token(stream, state.base);
+        state.basePos = stream.pos;
+      }
+      if (stream.start == state.overlayPos) {
+        stream.pos = stream.start;
+        state.overlayCur = overlay.token(stream, state.overlay);
+        state.overlayPos = stream.pos;
+      }
+      stream.pos = Math.min(state.basePos, state.overlayPos);
+      if (stream.eol()) state.basePos = state.overlayPos = 0;
+
+      if (state.overlayCur == null) return state.baseCur;
+      if (state.baseCur != null && combine) return state.baseCur + " " + state.overlayCur;
+      else return state.overlayCur;
+    },
+
+    indent: base.indent && function(state, textAfter) {
+      return base.indent(state.base, textAfter);
+    },
+    electricChars: base.electricChars,
+
+    innerMode: function(state) { return {state: state.base, mode: base}; },
+
+    blankLine: function(state) {
+      if (base.blankLine) base.blankLine(state.base);
+      if (overlay.blankLine) overlay.blankLine(state.overlay);
+    }
+  };
+};
+
 const listRE = /^(\s*)([*+-]|(\d+)\.)([\w+(\s+\w+)]|[\s*])/,
     emptyListRE = /^(\s*)([*+-]|(\d+)\.)(\s*)$/,
     unorderedBullets = '*+-';
@@ -13031,6 +13091,103 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
 
 CodeMirror.defineMIME("text/x-markdown", "markdown");
 
+CodeMirror.defineMode("gfm", function(config) {
+  var codeDepth = 0;
+  function blankLine(state) {
+    state.code = false;
+    return null;
+  }
+  var gfmOverlay = {
+    startState: function() {
+      return {
+        code: false,
+        codeBlock: false,
+        ateSpace: false
+      };
+    },
+    copyState: function(s) {
+      return {
+        code: s.code,
+        codeBlock: s.codeBlock,
+        ateSpace: s.ateSpace
+      };
+    },
+    token: function(stream, state) {
+      // Hack to prevent formatting override inside code blocks (block and inline)
+      if (state.codeBlock) {
+        if (stream.match(/^```/)) {
+          state.codeBlock = false;
+          return null;
+        }
+        stream.skipToEnd();
+        return null;
+      }
+      if (stream.sol()) {
+        state.code = false;
+      }
+      if (stream.sol() && stream.match(/^```/)) {
+        stream.skipToEnd();
+        state.codeBlock = true;
+        return null;
+      }
+      // If this block is changed, it may need to be updated in Markdown mode
+      if (stream.peek() === '`') {
+        stream.next();
+        var before = stream.pos;
+        stream.eatWhile('`');
+        var difference = 1 + stream.pos - before;
+        if (!state.code) {
+          codeDepth = difference;
+          state.code = true;
+        } else {
+          if (difference === codeDepth) { // Must be exact
+            state.code = false;
+          }
+        }
+        return null;
+      } else if (state.code) {
+        stream.next();
+        return null;
+      }
+      // Check if space. If so, links can be formatted later on
+      if (stream.eatSpace()) {
+        state.ateSpace = true;
+        return null;
+      }
+      if (stream.sol() || state.ateSpace) {
+        state.ateSpace = false;
+        if(stream.match(/^(?:[a-zA-Z0-9\-_]+\/)?(?:[a-zA-Z0-9\-_]+@)?(?:[a-f0-9]{7,40}\b)/)) {
+          // User/Project@SHA
+          // User@SHA
+          // SHA
+          return "link";
+        } else if (stream.match(/^(?:[a-zA-Z0-9\-_]+\/)?(?:[a-zA-Z0-9\-_]+)?#[0-9]+\b/)) {
+          // User/Project#Num
+          // User#Num
+          // #Num
+          return "link";
+        }
+      }
+      if (stream.match(/^((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\([^\s()<>]*\))+(?:\([^\s()<>]*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/i)) {
+        // URLs
+        // Taken from http://daringfireball.net/2010/07/improved_regex_for_matching_urls
+        // And then (issue #1160) simplified to make it not crash the Chrome Regexp engine
+        return "link";
+      }
+      stream.next();
+      return null;
+    },
+    blankLine: blankLine
+  };
+  CodeMirror.defineMIME("gfmBase", {
+    name: "markdown",
+    underscoresBreakWords: false,
+    taskLists: true,
+    fencedCodeBlocks: true
+  });
+  return CodeMirror.overlayMode(CodeMirror.getMode(config, "gfmBase"), gfmOverlay);
+}, "markdown");
+
 var isMac = /Mac/.test(navigator.platform);
 
 var shortcuts = {
@@ -13204,7 +13361,9 @@ function toggleBold(editor) {
     endPoint.ch += 2;
   }
   cm.setSelection(startPoint, endPoint);
-  cm.focus();
+  if (startPoint.ch === endPoint.ch) {
+    cm.focus();
+  }
   //_toggleBlock(editor, 'bold', '**');
 }
 
@@ -13238,7 +13397,9 @@ function toggleItalic(editor) {
     endPoint.ch += 1;
   }
   cm.setSelection(startPoint, endPoint);
-  cm.focus();
+  if (startPoint.ch === endPoint.ch) {
+    cm.focus();
+  }
   //_toggleBlock(editor, 'italic', '*');
 }
 
@@ -13407,7 +13568,9 @@ function _replaceSelection(cm, active, start, end) {
     endPoint.ch += start.length;
   }
   cm.setSelection(startPoint, endPoint);
-  cm.focus();
+  if (startPoint.ch === endPoint.ch) {
+    cm.focus();
+  }
 }
 
 
@@ -13598,12 +13761,12 @@ Editor.prototype.render = function (el) {
   keyMaps['Shift-Tab'] = 'shiftTabAndIndentContinueMarkdownList';
 
   this.codemirror = CodeMirror.fromTextArea(el, {
-    mode: 'markdown',
+    mode: 'gfm',
     theme: 'paper',
     tabSize: '2',
     indentWithTabs: true,
     lineNumbers: false,
-    autofocus: true,
+    autofocus: false,
     extraKeys: keyMaps
   });
 
@@ -14344,11 +14507,11 @@ module.exports = [
     filter: 'li',
     replacement: function (content, node) {
       content = content.replace(/^\s+/, '').replace(/\n/gm, '\n    ');
-      var prefix = '*   ';
+      var prefix = '* ';
       var parent = node.parentNode;
       var index = Array.prototype.indexOf.call(parent.children, node) + 1;
 
-      prefix = /ol/i.test(parent.nodeName) ? index + '.  ' : '*   ';
+      prefix = /ol/i.test(parent.nodeName) ? index + '. ' : '* ';
       return prefix + content;
     }
   },
