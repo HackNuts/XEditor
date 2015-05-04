@@ -57,6 +57,16 @@ textarea 是初始化 XEditor 的必需选项，可以接受 jQuery Object、HTM
   * `connectionCount`（默认值：1）同时上传文件的最大数量
   * `leaveConfirm`（默认值：'正在上传文件，如果离开上传会自动取消'）在文件上传过程中离开页面时提醒的文字
 
+注：图片上传成功后，服务端需要返回 json 格式的图片地址：
+  
+```json
+{
+  "success": true/false,
+  "msg": "上传失败信息", # 可选
+  "file_path": "[real file path]"
+}
+```
+
 ##API
 
 XEditor 初始化之后，编辑器实例会暴露一些公共方法供调用：
