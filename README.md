@@ -73,6 +73,16 @@ XEditor 初始化之后，编辑器实例会暴露一些公共方法供调用：
 
 将编辑器的正文内容同步到 textarea 元素中。
 
+##样式自定义
+
+修改 `src/editor.less` 内容，生成 CSS 代码引入即可，`src/editor.less` 的结构如下所示：
+
+* `.xeditor` 编辑器容器样式
+* `.xeditor-toolbar` 编辑器工具栏样式
+* `.xeditor-body` 编辑器正文容器样式
+* `.xeditor-body.simditor-body` 富文本编辑器正文样式
+* `.xeditor-body.meditor-body` Markdown 编辑器正文样式
+
 ##搭建开发环境
 
 将仓库 clone 到本地：

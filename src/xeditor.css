@@ -1,15 +1,414 @@
 .xeditor {
   display: block;
 }
-.xeditor > .meditor {
+.xeditor .xeditor-wapper {
+  border: 1px solid #c9d8db;
+  position: relative;
+}
+.xeditor-toolbar {
+  position: relative;
+  border-bottom: 1px solid #eeeeee;
+  padding: 0 6px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+.xeditor-toolbar > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.xeditor-toolbar > ul:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.xeditor-toolbar > ul > li {
+  position: relative;
+  float: left;
+  display: block;
+}
+.xeditor-toolbar > ul > li > a {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none !important;
+  cursor: pointer;
+  font-size: 15px;
+  width: 46px;
+  height: 40px;
+  line-height: 40px;
+  opacity: 0.6;
+  color: #333;
+  z-index: 21;
+  background-color: #fff;
+}
+.xeditor-toolbar > ul > li > a.active {
+  background: #eeeeee;
+  opacity: 1;
+}
+.xeditor-toolbar > ul > li > a.disabled {
+  cursor: default;
+}
+.xeditor-toolbar > ul > li > a.disabled span {
+  opacity: 0.3;
+}
+.xeditor-toolbar > ul > li > a.meditor-icon-markdown {
+  background: #eeeeee;
+  opacity: 1;
+}
+.xeditor-toolbar > ul > li .separator {
+  display: block;
+  float: left;
+  background: #cfcfcf;
+  width: 1px;
+  height: 18px;
+  margin: 11px 15px;
+}
+.xeditor-toolbar > ul > li > .toolbar-menu {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  z-index: 20;
+  background: #ffffff;
+  text-align: left;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+.xeditor-toolbar > ul > li > .toolbar-menu ul {
+  min-width: 160px;
+  list-style: none;
+  margin: 0;
+  padding: 10px 1px;
+}
+.xeditor-toolbar > ul > li > .toolbar-menu ul > li .menu-item {
+  display: block;
+  font-size: 16px;
+  line-height: 2em;
+  padding: 0 10px;
+  text-decoration: none;
+  color: #666666;
+}
+.xeditor-toolbar > ul > li > .toolbar-menu ul > li .menu-item:hover {
+  background: #f6f6f6;
+}
+.xeditor-toolbar > ul > li > .toolbar-menu input {
   display: none;
 }
-.xeditor > .simditor {
+.xeditor-toolbar > ul > li.active a {
+  background: #eeeeee;
+  opacity: 1;
+}
+.xeditor-toolbar > ul > li:hover > a {
+  opacity: 1;
+}
+.xeditor-toolbar > ul > li.menu-on > a {
+  position: relative;
+  z-index: 21;
+  background: #ffffff;
+  box-shadow: 0 -3px 3px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+}
+.xeditor-toolbar > ul > li.menu-on .toolbar-menu {
   display: block;
 }
-.xeditor.markdown > .meditor {
+.xeditor-body {
+  min-height: 300px;
+  height: auto;
+  padding: 22px 15px 30px 11px;
+  outline: none;
+  cursor: text;
+  position: relative;
+  z-index: 1;
+  background: transparent;
+}
+.xeditor-body.simditor-body {
+  font-size: 16px;
+  font-family: arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  outline: none;
+  word-wrap: break-word;
+}
+.xeditor-body.simditor-body > :first-child {
+  margin-top: 0 !important;
+}
+.xeditor-body.simditor-body a {
+  color: #4298BA;
+  text-decoration: none;
+  word-break: break-all;
+}
+.xeditor-body.simditor-body a:visited {
+  color: #4298BA;
+}
+.xeditor-body.simditor-body a:hover {
+  color: #0F769F;
+}
+.xeditor-body.simditor-body a:active {
+  color: #9E792E;
+}
+.xeditor-body.simditor-body a:hover,
+.xeditor-body.simditor-body a:active {
+  outline: 0;
+}
+.xeditor-body.simditor-body p,
+.xeditor-body.simditor-body div {
+  margin: 0 0 15px 0;
+  color: #333;
+  word-wrap: break-word;
+}
+.xeditor-body.simditor-body b,
+.xeditor-body.simditor-body strong {
+  font-weight: bold;
+}
+.xeditor-body.simditor-body i,
+.xeditor-body.simditor-body em {
+  font-style: italic;
+}
+.xeditor-body.simditor-body u {
+  text-decoration: underline;
+}
+.xeditor-body.simditor-body strike,
+.xeditor-body.simditor-body del {
+  text-decoration: line-through;
+}
+.xeditor-body.simditor-body ul,
+.xeditor-body.simditor-body ol {
+  list-style: disc outside none;
+  margin: 15px 0;
+  padding: 0 0 0 40px;
+  line-height: 1.6;
+}
+.xeditor-body.simditor-body ul ul,
+.xeditor-body.simditor-body ol ul,
+.xeditor-body.simditor-body ul ol,
+.xeditor-body.simditor-body ol ol {
+  padding-left: 30px;
+}
+.xeditor-body.simditor-body ul ul,
+.xeditor-body.simditor-body ol ul {
+  list-style: circle outside none;
+}
+.xeditor-body.simditor-body ul ul ul,
+.xeditor-body.simditor-body ol ul ul {
+  list-style: square outside none;
+}
+.xeditor-body.simditor-body ol {
+  list-style: decimal;
+}
+.xeditor-body.simditor-body blockquote {
+  border-left: 6px solid #ddd;
+  padding: 5px 0 5px 10px;
+  margin: 15px 0 15px 15px;
+}
+.xeditor-body.simditor-body blockquote > :first-child {
+  margin-top: 0;
+}
+.xeditor-body.simditor-body pre {
+  padding: 10px 5px 10px 10px;
+  margin: 15px 0;
+  display: block;
+  line-height: 18px;
+  background: #F0F0F0;
+  border-radius: 3px;
+  font-size: 13px;
+  font-family: 'monaco', 'Consolas', "Liberation Mono", Courier, monospace;
+  white-space: pre;
+  word-wrap: normal;
+  overflow-x: auto;
+}
+.xeditor-body.simditor-body code {
+  display: inline-block;
+  padding: 0 4px;
+  margin: 0 5px;
+  background: #eeeeee;
+  border-radius: 3px;
+  font-size: 13px;
+  font-family: 'monaco', 'Consolas', "Liberation Mono", Courier, monospace;
+}
+.xeditor-body.simditor-body hr {
+  display: block;
+  height: 0px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 15px 0;
+  padding: 0;
+}
+.xeditor-body.simditor-body img {
+  margin: 0 5px;
+  vertical-align: middle;
+}
+.xeditor-body.simditor-body *[data-indent="1"] {
+  margin-left: 40px;
+}
+.xeditor-body.simditor-body *[data-indent="2"] {
+  margin-left: 80px;
+}
+.xeditor-body.simditor-body *[data-indent="3"] {
+  margin-left: 120px;
+}
+.xeditor-body.simditor-body *[data-indent="4"] {
+  margin-left: 160px;
+}
+.xeditor-body.simditor-body *[data-indent="5"] {
+  margin-left: 200px;
+}
+.xeditor-body.simditor-body *[data-indent="6"] {
+  margin-left: 240px;
+}
+.xeditor-body.simditor-body *[data-indent="7"] {
+  margin-left: 280px;
+}
+.xeditor-body.simditor-body *[data-indent="8"] {
+  margin-left: 320px;
+}
+.xeditor-body.simditor-body *[data-indent="9"] {
+  margin-left: 360px;
+}
+.xeditor-body.simditor-body *[data-indent="10"] {
+  margin-left: 400px;
+}
+.xeditor-body.meditor-body {
+  /* PADDING */
+  /* CURSOR */
+  /* Shown when moving in bi-directional text */
+  /* Can style cursor different in overwrite (non-insert) mode */
+  /* DEFAULT THEME */
+}
+.xeditor-body.meditor-body .CodeMirror-lines {
+  padding: 4px 0;
+  /* Vertical padding around content */
+}
+.xeditor-body.meditor-body pre {
+  padding: 0 4px;
+  /* Horizontal padding of content */
+}
+.xeditor-body.meditor-body .CodeMirror-scrollbar-filler {
+  background-color: white;
+  /* The little square between H and V scrollbars */
+}
+.xeditor-body.meditor-body div.CodeMirror-cursor {
+  border-left: 1px solid black;
+  z-index: 3;
+}
+.xeditor-body.meditor-body div.CodeMirror-secondarycursor {
+  border-left: 1px solid silver;
+}
+.xeditor-body.meditor-body.cm-keymap-fat-cursor div.CodeMirror-cursor {
+  width: auto;
+  border: 0;
+  background: #7e7;
+  z-index: 1;
+}
+.xeditor-body.meditor-body .cm-keyword {
+  color: #555;
+}
+.xeditor-body.meditor-body .cm-atom {
+  color: #7f8c8d;
+}
+.xeditor-body.meditor-body .cm-number {
+  color: #7f8c8d;
+}
+.xeditor-body.meditor-body .cm-def {
+  color: #00f;
+}
+.xeditor-body.meditor-body .cm-variable {
+  color: black;
+}
+.xeditor-body.meditor-body .cm-variable-2 {
+  color: #555;
+}
+.xeditor-body.meditor-body .cm-variable-3 {
+  color: #085;
+}
+.xeditor-body.meditor-body .cm-property {
+  color: black;
+}
+.xeditor-body.meditor-body .cm-operator {
+  color: black;
+}
+.xeditor-body.meditor-body .cm-comment {
+  color: #959595;
+}
+.xeditor-body.meditor-body .cm-string {
+  color: #7f8c8d;
+}
+.xeditor-body.meditor-body .cm-string-2 {
+  color: #f50;
+}
+.xeditor-body.meditor-body .cm-meta {
+  color: #555;
+}
+.xeditor-body.meditor-body .cm-error {
+  color: #f00;
+}
+.xeditor-body.meditor-body .cm-qualifier {
+  color: #555;
+}
+.xeditor-body.meditor-body .cm-builtin {
+  color: #555;
+}
+.xeditor-body.meditor-body .cm-bracket {
+  color: #997;
+}
+.xeditor-body.meditor-body .cm-tag {
+  color: #7f8c8d;
+}
+.xeditor-body.meditor-body .cm-attribute {
+  color: #7f8c8d;
+}
+.xeditor-body.meditor-body .cm-header {
+  color: #000;
+}
+.xeditor-body.meditor-body .cm-quote {
+  color: #888;
+}
+.xeditor-body.meditor-body .cm-hr {
+  color: #999;
+}
+.xeditor-body.meditor-body .cm-link {
+  color: #7f8c8d;
+}
+.xeditor-body.meditor-body .cm-negative {
+  color: #d44;
+}
+.xeditor-body.meditor-body .cm-positive {
+  color: #292;
+}
+.xeditor-body.meditor-body .cm-header,
+.xeditor-body.meditor-body .cm-strong {
+  font-weight: bold;
+}
+.xeditor-body.meditor-body .cm-em {
+  font-style: italic;
+}
+.xeditor-body.meditor-body .cm-link {
+  text-decoration: underline;
+}
+.xeditor-body.meditor-body .cm-invalidchar {
+  color: #f00;
+}
+.xeditor-body.meditor-body span.CodeMirror-matchingbracket {
+  color: #0f0;
+}
+.xeditor-body.meditor-body span.CodeMirror-nonmatchingbracket {
+  color: #f22;
+}
+/* STOP */
+.xeditor {
   display: block;
 }
-.xeditor.markdown > .simditor {
+.xeditor .meditor {
+  overflow: hidden;
+  display: none;
+}
+.xeditor .simditor {
+  display: block;
+}
+.xeditor.markdown .meditor {
+  display: block;
+}
+.xeditor.markdown .simditor {
   display: none;
 }

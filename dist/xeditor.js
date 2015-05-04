@@ -1,8 +1,3 @@
-/*!
-* Simditor v2.1.9
-* http://simditor.tower.im/
-* 2015-04-05
-*/
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -2538,7 +2533,7 @@ Toolbar = (function(superClass) {
   };
 
   Toolbar.prototype._tpl = {
-    wrapper: '<div class="simditor-toolbar"><ul></ul></div>',
+    wrapper: '<div class="simditor-toolbar xeditor-toolbar"><ul></ul></div>',
     separator: '<li><span class="separator"></span></li>'
   };
 
@@ -2949,7 +2944,7 @@ Simditor = (function(superClass) {
     }
   };
 
-  Simditor.prototype._tpl = "<div class=\"simditor\">\n  <div class=\"simditor-wrapper\">\n    <div class=\"simditor-placeholder\"></div>\n    <div class=\"simditor-body\" contenteditable=\"true\">\n    </div>\n  </div>\n</div>";
+  Simditor.prototype._tpl = "<div class=\"simditor xeditor-wapper\">\n  <div class=\"simditor-wrapper\">\n    <div class=\"simditor-placeholder\"></div>\n    <div class=\"simditor-body xeditor-body\" contenteditable=\"true\">\n    </div>\n  </div>\n</div>";
 
   Simditor.prototype._render = function() {
     var key, ref, results1, val;
@@ -13630,7 +13625,7 @@ Editor.prototype.createToolbar = function (items) {
   }
 
   var bar = document.createElement('div');
-  bar.className = 'editor-toolbar';
+  bar.className = 'xeditor-toolbar';
 
   var ul = document.createElement('ul');
 
@@ -13716,8 +13711,9 @@ Editor.prototype.createToolbar = function (items) {
   });
 
   var cmWrapper = cm.getWrapperElement();
-  var $wapper = $("<div class='meditor'></div>");
+  var $wapper = $("<div class='meditor xeditor-wapper'></div>");
 
+  $(cmWrapper).addClass('xeditor-body meditor-body');
   cmWrapper.parentNode.insertBefore(bar, cmWrapper);
   $wapper.insertBefore(bar);
   $wapper.append(bar);
