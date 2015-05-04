@@ -1,7 +1,7 @@
 /*!
 * Simditor v2.1.9
 * http://simditor.tower.im/
-* 2015-03-05
+* 2015-04-05
 */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -698,7 +698,7 @@ return uploader;
   }
 }(this, function ($, SimpleModule, simpleHotkeys, simpleUploader) {
 
-var BlockquoteButton, BoldButton, Button, CodeButton, CodePopover, ColorButton, Formatter, HrButton, ImageButton, ImagePopover, IndentButton, Indentation, InputManager, ItalicButton, Keystroke, LinkButton, LinkPopover, ListButton, MarkdownButton, OrderListButton, OutdentButton, Popover, Selection, Simditor, SourceButton, StrikethroughButton, TableButton, TitleButton, Toolbar, UnderlineButton, UndoManager, UnorderListButton, Util,
+var BoldButton, Button, CodeButton, CodePopover, ColorButton, Formatter, FullscreenButton, HrButton, ImageButton, ImagePopover, IndentButton, Indentation, InputManager, ItalicButton, Keystroke, LinkButton, LinkPopover, ListButton, MarkdownButton, OrderListButton, OutdentButton, Popover, QuoteButton, Selection, Simditor, SourceButton, StrikethroughButton, TableButton, TitleButton, Toolbar, UnderlineButton, UndoManager, UnorderListButton, Util,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
@@ -2549,7 +2549,7 @@ Toolbar = (function(superClass) {
       return;
     }
     if (!$.isArray(this.opts.toolbar)) {
-      this.opts.toolbar = ['bold', 'italic', 'underline', 'strikethrough', '|', 'ol', 'ul', 'blockquote', 'code', '|', 'link', 'image', '|', 'indent', 'outdent', 'markdown'];
+      this.opts.toolbar = ['bold', 'italic', 'underline', 'strikethrough', '|', 'ol', 'ul', 'quote', 'code', '|', 'link', 'image', '|', 'indent', 'outdent', 'markdown', 'fullscreen'];
     }
     this._render();
     this.list.on('click', (function(_this) {
@@ -4098,22 +4098,22 @@ Simditor.Toolbar.addButton(OrderListButton);
 
 Simditor.Toolbar.addButton(UnorderListButton);
 
-BlockquoteButton = (function(superClass) {
-  extend(BlockquoteButton, superClass);
+QuoteButton = (function(superClass) {
+  extend(QuoteButton, superClass);
 
-  function BlockquoteButton() {
-    return BlockquoteButton.__super__.constructor.apply(this, arguments);
+  function QuoteButton() {
+    return QuoteButton.__super__.constructor.apply(this, arguments);
   }
 
-  BlockquoteButton.prototype.name = 'blockquote';
+  QuoteButton.prototype.name = 'quote';
 
-  BlockquoteButton.prototype.icon = 'quote-left';
+  QuoteButton.prototype.icon = 'quote-left';
 
-  BlockquoteButton.prototype.htmlTag = 'blockquote';
+  QuoteButton.prototype.htmlTag = 'blockquote';
 
-  BlockquoteButton.prototype.disableTag = 'pre, table';
+  QuoteButton.prototype.disableTag = 'pre, table';
 
-  BlockquoteButton.prototype.command = function() {
+  QuoteButton.prototype.command = function() {
     var $contents, $endBlock, $startBlock, endNode, j, len, node, range, ref, results, startNode;
     range = this.editor.selection.getRange();
     startNode = range.startContainer;
@@ -4150,7 +4150,7 @@ BlockquoteButton = (function(superClass) {
     return this.editor.trigger('valuechanged');
   };
 
-  BlockquoteButton.prototype._convertEl = function(el) {
+  QuoteButton.prototype._convertEl = function(el) {
     var $el, block, results;
     $el = $(el);
     results = [];
@@ -4167,11 +4167,11 @@ BlockquoteButton = (function(superClass) {
     return results;
   };
 
-  return BlockquoteButton;
+  return QuoteButton;
 
 })(Button);
 
-Simditor.Toolbar.addButton(BlockquoteButton);
+Simditor.Toolbar.addButton(QuoteButton);
 
 CodeButton = (function(superClass) {
   extend(CodeButton, superClass);
@@ -5793,6 +5793,34 @@ MarkdownButton = (function(superClass) {
 })(Simditor.Button);
 
 Simditor.Toolbar.addButton(MarkdownButton);
+
+FullscreenButton = (function(superClass) {
+  extend(FullscreenButton, superClass);
+
+  function FullscreenButton() {
+    return FullscreenButton.__super__.constructor.apply(this, arguments);
+  }
+
+  FullscreenButton.prototype._init = function() {
+    this.title = '写作模式';
+    return FullscreenButton.__super__._init.apply(this, arguments);
+  };
+
+  FullscreenButton.prototype.name = 'fullscreen';
+
+  FullscreenButton.prototype.needFocus = false;
+
+  FullscreenButton.prototype.icon = 'expand';
+
+  FullscreenButton.prototype.command = function() {
+    return console.log('fullscreen');
+  };
+
+  return FullscreenButton;
+
+})(Simditor.Button);
+
+Simditor.Toolbar.addButton(FullscreenButton);
 
 return Simditor;
 
@@ -13081,9 +13109,8 @@ function createIcon(name, options) {
 }
 
 function createSep() {
-  el = document.createElement('i');
-  el.className = 'separator';
-  el.innerHTML = '|';
+  el = document.createElement('li');
+  el.innerHTML = "<span class='separator'></span>";
   return el;
 }
 
@@ -13471,16 +13498,16 @@ var toolbar = [
   {name: 'bold', icon: 'bold', action: toggleBold, title: '加粗文字'},
   {name: 'italic', icon: 'italic', action: toggleItalic, title: '斜体文字'},
   {name: 'underline', icon: 'underline', action: toggleUnderline, title: '下划线文字'},
-  {name: 'unordered-list', icon: 'list-ul', action: toggleUnOrderedList, title: '无序列表'},
-  {name: 'ordered-list', icon: 'list-ol', action: toggleOrderedList, title: "有序列表"},
+  {name: 'ul', icon: 'list-ul', action: toggleUnOrderedList, title: '无序列表'},
+  {name: 'ol', icon: 'list-ol', action: toggleOrderedList, title: "有序列表"},
   {name: 'quote', icon: 'quote-left', action: toggleBlockquote, title: "引用"},
   {name: 'code', icon: 'code', action: toggleCodeBlock, title: '插入代码'},
   {name: 'link', icon: 'link', action: drawLink, title: '插入链接'},
   {name: 'image', icon: 'image', title: '插入图片'},
-  {name: 'cancel-markdown', icon: 'maxcdn', action: cancelMarkdown, title: '切换到富文本模式'},
-  {name: 'info', icon: 'info', href: 'http://www.appinn.com/markdown', title: 'Markdown 帮助'},
+  {name: 'markdown', icon: 'maxcdn', action: cancelMarkdown, title: '切换到富文本模式'},
+  //{name: 'info', icon: 'info', href: 'http://www.appinn.com/markdown', title: 'Markdown 帮助'},
   //{name: 'preview', icon: 'eye', action: togglePreview, title: '浏览'},
-  //{name: 'fullscreen', icon: 'expand', action: null, title: '写作模式'}
+  {name: 'fullscreen', icon: 'expand', action: null, title: '写作模式'}
 ];
 
 /**
@@ -13493,7 +13520,27 @@ function Editor(options) {
     this.element = options.element;
   }
 
-  options.toolbar = options.toolbar || Editor.toolbar;
+  if (options.toolbar) {
+    var toolbarItems = [];
+
+    for (var i = 0; i < options.toolbar.length; i++) {
+      if (options.toolbar[i] === '|') {
+        toolbarItems.push('|');
+        continue;
+      }
+
+      for (var j = 0; j < Editor.toolbar.length; j++) {
+        if (Editor.toolbar[j].name == options.toolbar[i]) {
+          toolbarItems.push(Editor.toolbar[j]);
+        }
+      }
+    }
+
+    options.toolbar = toolbarItems;
+  } else {
+    options.toolbar = options.toolbar || Editor.toolbar;
+  }
+
   // you can customize toolbar with object
   // [{name: 'bold', shortcut: 'Ctrl-B', className: 'icon-bold'}]
 
@@ -14517,6 +14564,7 @@ function XEditor(options) {
 
   this.options = $.extend({
     rich: true,
+    toolbar: ['bold', 'italic', 'underline', 'ul', 'ol', 'quote', 'code', 'link', 'image', 'markdown'],
     defaultImage: 'default.png'
   }, options);
 
@@ -14533,11 +14581,13 @@ function XEditor(options) {
   // Rich editor
   this.richEditor = new Simditor({
     textarea: $textarea,
-    toolbar: ['bold', 'italic', 'underline', 'ul', 'ol', 'blockquote', 'code', 'link', 'image', 'markdown'],
+    toolbar: this.options.toolbar,
     defaultImage: this.options.defaultImage,
     toolbarFloat: false,
     upload: this.options.upload
   });
+
+  $(this.richEditor.el).find('.toolbar-item-fullscreen').parent().css('float', 'right');
 
   this.richEditor.parent = this;
   this.richEditor.el.wrap("<div class='xeditor'></div>");
@@ -14546,6 +14596,7 @@ function XEditor(options) {
   this.markdownEditor = new Editor({
     element: $textarea[0],
     status: false,
+    toolbar: this.options.toolbar,
     upload: this.options.upload
   });
   this.markdownEditor.render();

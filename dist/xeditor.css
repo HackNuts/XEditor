@@ -1,7 +1,7 @@
 /*!
 * Simditor v2.1.9
 * http://simditor.tower.im/
-* 2015-03-05
+* 2015-04-05
 */
 @font-face {
   font-family: 'Simditor';
@@ -257,15 +257,13 @@
   line-height: 40px;
   text-align: center;
   text-decoration: none;
-}
-.simditor .simditor-toolbar > ul > li > .toolbar-item span {
   opacity: 0.6;
 }
 .simditor .simditor-toolbar > ul > li > .toolbar-item span.simditor-icon {
   display: inline;
   line-height: normal;
 }
-.simditor .simditor-toolbar > ul > li > .toolbar-item:hover span {
+.simditor .simditor-toolbar > ul > li > .toolbar-item:hover {
   opacity: 1;
 }
 .simditor .simditor-toolbar > ul > li > .toolbar-item.active {
@@ -1087,13 +1085,17 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   z-index: 21;
   background-color: #fff;
 }
-.editor-toolbar > ul > li > a.meditor-icon-cancel-markdown {
+.editor-toolbar > ul > li > a.meditor-icon-markdown {
   background: #eeeeee;
   opacity: 1;
 }
-.editor-toolbar > ul > li > a.meditor-icon-fullscreen {
-  position: absolute;
-  right: 6px;
+.editor-toolbar > ul > li .separator {
+  display: block;
+  float: left;
+  background: #cfcfcf;
+  width: 1px;
+  height: 18px;
+  margin: 11px 15px;
 }
 .editor-toolbar > ul > li > .toolbar-menu {
   display: none;
@@ -1124,15 +1126,6 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 }
 .editor-toolbar > ul > li > .toolbar-menu input {
   display: none;
-}
-.editor-toolbar > ul > li i.separator {
-  display: inline-block;
-  width: 0;
-  border-left: 1px solid #d9d9d9;
-  border-right: 1px solid white;
-  color: transparent;
-  text-indent: -10px;
-  margin: 0 6px;
 }
 .editor-toolbar > ul > li.active a {
   background: #eeeeee;

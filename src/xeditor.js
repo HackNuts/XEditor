@@ -9,6 +9,7 @@ function XEditor(options) {
 
   this.options = $.extend({
     rich: true,
+    toolbar: ['bold', 'italic', 'underline', 'ul', 'ol', 'quote', 'code', 'link', 'image', 'markdown'],
     defaultImage: 'default.png'
   }, options);
 
@@ -25,11 +26,13 @@ function XEditor(options) {
   // Rich editor
   this.richEditor = new Simditor({
     textarea: $textarea,
-    toolbar: ['bold', 'italic', 'underline', 'ul', 'ol', 'blockquote', 'code', 'link', 'image', 'markdown'],
+    toolbar: this.options.toolbar,
     defaultImage: this.options.defaultImage,
     toolbarFloat: false,
     upload: this.options.upload
   });
+
+  $(this.richEditor.el).find('.toolbar-item-fullscreen').parent().css('float', 'right');
 
   this.richEditor.parent = this;
   this.richEditor.el.wrap("<div class='xeditor'></div>");
@@ -38,6 +41,7 @@ function XEditor(options) {
   this.markdownEditor = new Editor({
     element: $textarea[0],
     status: false,
+    toolbar: this.options.toolbar,
     upload: this.options.upload
   });
   this.markdownEditor.render();
