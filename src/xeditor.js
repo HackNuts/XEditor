@@ -23,7 +23,19 @@ function XEditor(options) {
 
   $textarea.hide();
 
+  var originalContent = $textarea.text();
+  var html, markdown;
+
+  if (this.options.rich) {
+    html = originalContent;
+    markdown = htmlToMarkdown(html);
+  } else {
+    markdown = originalContent;
+    html = markdownToHTML(markdown);
+  }
+
   // Rich editor
+  setTextareaValue($textarea, html);
   this.richEditor = new Simditor({
     textarea: $textarea,
     toolbar: this.options.toolbar,
@@ -32,12 +44,15 @@ function XEditor(options) {
     upload: this.options.upload
   });
 
+  $textarea.text(markdown);
+
   $(this.richEditor.el).find('.toolbar-item-fullscreen').parent().css('float', 'right');
 
   this.richEditor.parent = this;
   this.richEditor.el.wrap("<div class='xeditor'></div>");
 
   // Markdown editor
+  setTextareaValue($textarea, markdown);
   this.markdownEditor = new Editor({
     element: $textarea[0],
     status: false,
@@ -52,6 +67,8 @@ function XEditor(options) {
   // Attach some attr
   this.textarea = $textarea;
   this.element = this.richEditor.el.parent();
+
+  setTextareaValue($textarea, '');
 
   this.rich = this.options.rich;
   if (!this.rich) {
@@ -94,7 +111,7 @@ XEditor.prototype.setValue = function (content) {
 };
 
 XEditor.prototype.sync = function () {
-  this.textarea.text(this.getValue());
+  setTextareaValue(this.textarea, this.getValue());
 };
 
 function htmlToMarkdown(html) {
@@ -117,4 +134,9 @@ function markdownToHTML(markdown) {
   };
 
   return marked(markdown, {renderer: renderer});
+}
+
+function setTextareaValue($textarea, val) {
+  $textarea.text(val);
+  $textarea.val(val);
 }
