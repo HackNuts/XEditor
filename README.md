@@ -62,7 +62,7 @@ textarea 是初始化 XEditor 的必需选项，可以接受 jQuery Object、HTM
 ```
 {
   "success": true/false,
-  "msg": "上传失败信息", # 可选
+  "msg": "上传失败信息", // 可选
   "file_path": "[real file path]"
 }
 ```
