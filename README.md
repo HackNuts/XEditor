@@ -83,6 +83,14 @@ XEditor 初始化之后，编辑器实例会暴露一些公共方法供调用：
 
 将编辑器的正文内容同步到 textarea 元素中。
 
+###switchToMarkdown()
+
+切换到 Markdown 编辑模式。
+
+###switchToRich()
+
+切换到富文本编辑模式。
+
 ##样式自定义
 
 修改 `src/editor.less` 内容，生成 CSS 代码引入即可，`src/editor.less` 的结构如下所示：
