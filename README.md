@@ -36,7 +36,7 @@ var editor = new XEditor({
 
 textarea 是初始化 XEditor 的必需选项，可以接受 jQuery Object、HTML Element 或者 Selector String。另外，XEditor 还支持这些可选 option：
 
-* `rich`（默认值：true）编辑器模式设置，`true` 为富文本编辑模式，`false` 为 markdown 编辑模式
+* `rich`（默认值：true）编辑器初始化模式设置，`true` 为富文本编辑模式，`false` 为 markdown 编辑模式
 * `toolbar`（默认值：['bold', 'italic', 'underline', 'ul', 'ol', 'quote', 'code', 'link', 'image', 'markdown']）编辑器工具栏按钮，支持以下按钮：
   * 'bold'：加粗
   * 'italic'：斜体
