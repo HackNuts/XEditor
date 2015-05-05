@@ -116,20 +116,20 @@
 .xeditor-body {
   min-height: 300px;
   height: auto;
-  padding: 22px 15px 30px 11px;
+  padding: 20px 20px 30px 20px;
   outline: none;
   cursor: text;
   position: relative;
   z-index: 1;
   background: transparent;
+  font-family: arial, sans-serif;
+  line-height: 1.4;
+  font-size: 16px;
+  color: #333;
+  word-wrap: break-word;
 }
 .xeditor-body.simditor-body {
-  font-size: 16px;
-  font-family: arial, sans-serif;
-  line-height: 1.6;
-  color: #333;
   outline: none;
-  word-wrap: break-word;
 }
 .xeditor-body.simditor-body > :first-child {
   margin-top: 0 !important;
@@ -199,7 +199,7 @@
 }
 .xeditor-body.simditor-body blockquote {
   border-left: 6px solid #ddd;
-  padding: 5px 0 5px 10px;
+  padding: 5px 0 1px 10px;
   margin: 15px 0 15px 15px;
 }
 .xeditor-body.simditor-body blockquote > :first-child {
@@ -277,11 +277,11 @@
   /* DEFAULT THEME */
 }
 .xeditor-body.meditor-body .CodeMirror-lines {
-  padding: 4px 0;
+  padding: 0px 0;
   /* Vertical padding around content */
 }
 .xeditor-body.meditor-body pre {
-  padding: 0 4px;
+  padding: 0 0px;
   /* Horizontal padding of content */
 }
 .xeditor-body.meditor-body .CodeMirror-scrollbar-filler {
@@ -318,6 +318,7 @@
 }
 .xeditor-body.meditor-body .cm-variable-2 {
   color: #555;
+  line-height: 1.6;
 }
 .xeditor-body.meditor-body .cm-variable-3 {
   color: #085;
